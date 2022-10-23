@@ -1,0 +1,48 @@
+syntax = "proto3";
+package mochilao.travel;
+option go_package = "internal/grpc";
+import "google/api/annotations.proto";
+
+service Travel {
+    rpc PostTravel(TravelRequest) returns(TravelResponse){
+        option (google.api.http) = {
+            post: "/api/v1/travel"
+            };
+    }
+    rpc GetTravel(GetTravelRequest) returns(TravelResponse){
+        option (google.api.http) = {
+            get: "/api/v1/travel"
+            };
+    }
+}
+
+message GetTravelRequest {
+    string email = 1;
+}
+
+message TravelRequest {
+    string first_location = 1;
+    string second_location = 2;
+    string third_location = 3;
+    string email = 4;
+}
+
+message TravelResponse {
+    string first_location = 1;
+    string second_location = 2;
+    string third_location = 3;
+    Rental first_rental = 4;
+    Rental second_rental = 5;
+    Rental third_rental = 6;
+    string email = 7;
+}
+
+message Rental {
+	string City = 1;
+	string Country = 2;
+	string Name = 3;
+	string Summary = 4;
+	string Description = 5;
+	float Price = 6;
+	string Street = 7;
+}

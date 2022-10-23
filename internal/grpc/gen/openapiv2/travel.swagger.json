@@ -1,0 +1,152 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "travel.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Travel"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/travel": {
+      "get": {
+        "operationId": "Travel_GetTravel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/travelTravelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Travel"
+        ]
+      },
+      "post": {
+        "operationId": "Travel_PostTravel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/travelTravelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Travel"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "travelRental": {
+      "type": "object",
+      "properties": {
+        "City": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Summary": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "number",
+          "format": "float"
+        },
+        "Street": {
+          "type": "string"
+        }
+      }
+    },
+    "travelTravelResponse": {
+      "type": "object",
+      "properties": {
+        "firstLocation": {
+          "type": "string"
+        },
+        "secondLocation": {
+          "type": "string"
+        },
+        "thirdLocation": {
+          "type": "string"
+        },
+        "firstRental": {
+          "$ref": "#/definitions/travelRental"
+        },
+        "secondRental": {
+          "$ref": "#/definitions/travelRental"
+        },
+        "thirdRental": {
+          "$ref": "#/definitions/travelRental"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
