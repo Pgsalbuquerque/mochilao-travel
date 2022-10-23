@@ -7,6 +7,7 @@ service Travel {
     rpc PostTravel(TravelRequest) returns(TravelResponse){
         option (google.api.http) = {
             post: "/api/v1/travel"
+            body: "*"
             };
     }
     rpc GetTravel(GetTravelRequest) returns(TravelResponse){

@@ -61,6 +61,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/travelTravelRequest"
+            }
+          }
+        ],
         "tags": [
           "Travel"
         ]
@@ -118,6 +128,23 @@
           "format": "float"
         },
         "Street": {
+          "type": "string"
+        }
+      }
+    },
+    "travelTravelRequest": {
+      "type": "object",
+      "properties": {
+        "firstLocation": {
+          "type": "string"
+        },
+        "secondLocation": {
+          "type": "string"
+        },
+        "thirdLocation": {
+          "type": "string"
+        },
+        "email": {
           "type": "string"
         }
       }

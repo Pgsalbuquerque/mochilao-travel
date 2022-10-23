@@ -16,6 +16,6 @@ type Rental struct {
 	Name        string  `json:"name"`
 	Summary     string  `json:"summary"`
 	Description string  `json:"description"`
-	Price       float64 `json:"price"`
+	Price       float32 `json:"price"`
 	Street      string  `json:"street"`
 }
