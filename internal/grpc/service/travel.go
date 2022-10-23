@@ -36,24 +36,9 @@ func (server *TravelServer) PostTravel(ctx context.Context, request *gen.TravelR
 		FirstLocation:  travel.FirstLocation,
 		SecondLocation: travel.SecondLocation,
 		ThirdLocation:  travel.ThirdLocation,
-		FirstRental:    parseTypesRentalToGenRental(travel.FirstRental),
-		SecondRental:   parseTypesRentalToGenRental(travel.SecondRental),
-		ThirdRental:    parseTypesRentalToGenRental(travel.ThirdRental),
 		Email:          travel.Email,
 	}, nil
 
-}
-
-func parseTypesRentalToGenRental(rental types.Rental) *gen.Rental {
-	return &gen.Rental{
-		City:        rental.City,
-		Country:     rental.Country,
-		Name:        rental.Name,
-		Summary:     rental.Summary,
-		Description: rental.Description,
-		Price:       rental.Price,
-		Street:      rental.Street,
-	}
 }
 
 func (server *TravelServer) GetTravel(ctx context.Context, request *gen.GetTravelRequest) (*gen.TravelResponse, error) {
@@ -69,9 +54,6 @@ func (server *TravelServer) GetTravel(ctx context.Context, request *gen.GetTrave
 		FirstLocation:  travel.FirstLocation,
 		SecondLocation: travel.SecondLocation,
 		ThirdLocation:  travel.ThirdLocation,
-		FirstRental:    parseTypesRentalToGenRental(travel.FirstRental),
-		SecondRental:   parseTypesRentalToGenRental(travel.SecondRental),
-		ThirdRental:    parseTypesRentalToGenRental(travel.ThirdRental),
 		Email:          travel.Email,
 	}, nil
 

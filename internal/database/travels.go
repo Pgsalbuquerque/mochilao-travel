@@ -48,3 +48,22 @@ func (t *TravelsClient) FindTravel(email string) (*types.Travel, error) {
 	return &travel, nil
 
 }
+
+func (t *TravelsClient) FindTenant(rental types.Rental) (*types.Travel, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 40*time.Second)
+	defer cancel()
+
+	cur := t.travelsCollection.FindOne(ctx, bson.M{"firstlocation": rental.Fields.City})
+	if cur.Err() != nil {
+		return nil, cur.Err()
+	}
+
+	var travel types.Travel
+	err := cur.Decode(&travel)
+	if err != nil {
+		return nil, err
+	}
+
+	return &travel, nil
+
+}

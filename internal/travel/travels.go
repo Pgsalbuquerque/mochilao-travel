@@ -22,9 +22,6 @@ func (t *Travel) CreateTravel(firstLocation, secondLocation, thirdLocation, emai
 		FirstLocation:  firstLocation,
 		SecondLocation: secondLocation,
 		ThirdLocation:  thirdLocation,
-		FirstRental:    types.Rental{},
-		SecondRental:   types.Rental{},
-		ThirdRental:    types.Rental{},
 		Email:          email,
 	}
 

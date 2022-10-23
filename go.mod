@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.12.0
+	github.com/rabbitmq/amqp091-go v1.5.0
 	github.com/rs/zerolog v1.28.0
 	github.com/spf13/viper v1.13.0
 	go.mongodb.org/mongo-driver v1.10.3
