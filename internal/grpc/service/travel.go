@@ -8,6 +8,7 @@ import (
 
 type Travels interface {
 	CreateTravel(firstLocation, secondLocation, thirdLocation, email string) (*types.Travel, error)
+	FindTravel(email string) (*types.Travel, error)
 }
 
 type TravelServer struct {
@@ -57,6 +58,21 @@ func parseTypesRentalToGenRental(rental types.Rental) *gen.Rental {
 
 func (server *TravelServer) GetTravel(ctx context.Context, request *gen.GetTravelRequest) (*gen.TravelResponse, error) {
 
-	return &gen.TravelResponse{}, nil
+	email := request.GetEmail()
+
+	travel, err := server.travels.FindTravel(email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &gen.TravelResponse{
+		FirstLocation:  travel.FirstLocation,
+		SecondLocation: travel.SecondLocation,
+		ThirdLocation:  travel.ThirdLocation,
+		FirstRental:    parseTypesRentalToGenRental(travel.FirstRental),
+		SecondRental:   parseTypesRentalToGenRental(travel.SecondRental),
+		ThirdRental:    parseTypesRentalToGenRental(travel.ThirdRental),
+		Email:          travel.Email,
+	}, nil
 
 }

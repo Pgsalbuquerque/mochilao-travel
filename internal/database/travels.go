@@ -5,6 +5,7 @@ import (
 	"mochilao-travel/internal/types"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -27,4 +28,23 @@ func (t *TravelsClient) InsertTravel(travel types.Travel) (*types.Travel, error)
 	}
 
 	return &travel, nil
+}
+
+func (t *TravelsClient) FindTravel(email string) (*types.Travel, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 40*time.Second)
+	defer cancel()
+
+	cur := t.travelsCollection.FindOne(ctx, bson.M{"email": email})
+	if cur.Err() != nil {
+		return nil, cur.Err()
+	}
+
+	var travel types.Travel
+	err := cur.Decode(&travel)
+	if err != nil {
+		return nil, err
+	}
+
+	return &travel, nil
+
 }

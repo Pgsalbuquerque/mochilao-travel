@@ -8,6 +8,7 @@ type Travel struct {
 
 type TravelDB interface {
 	InsertTravel(types.Travel) (*types.Travel, error)
+	FindTravel(email string) (*types.Travel, error)
 }
 
 func NewTravel(travelDb TravelDB) *Travel {
@@ -33,4 +34,13 @@ func (t *Travel) CreateTravel(firstLocation, secondLocation, thirdLocation, emai
 	}
 
 	return result, nil
+}
+
+func (t *Travel) FindTravel(email string) (*types.Travel, error) {
+	travel, err := t.travelDb.FindTravel(email)
+	if err != nil {
+		return nil, err
+	}
+
+	return travel, nil
 }
