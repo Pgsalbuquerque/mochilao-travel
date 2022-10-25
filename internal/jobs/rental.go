@@ -35,8 +35,13 @@ func FoundTenant(rabbit *rabbit.RabbitMq, travelDB TravelDB) {
 				break
 			}
 			if err == nil {
+				rentalWithEmail := types.RentalWithEmail{
+					Fields:           rental.Fields,
+					DestinationEmail: travel.Email,
+					Geometry:         rental.Geometry,
+				}
 				reqBodyBytes := new(bytes.Buffer)
-				json.NewEncoder(reqBodyBytes).Encode(travel)
+				json.NewEncoder(reqBodyBytes).Encode(rentalWithEmail)
 				rabbit.Publish(reqBodyBytes.Bytes())
 			}
 		}

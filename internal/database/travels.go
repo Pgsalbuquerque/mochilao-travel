@@ -53,7 +53,13 @@ func (t *TravelsClient) FindTenant(rental types.Rental) (*types.Travel, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 40*time.Second)
 	defer cancel()
 
-	cur := t.travelsCollection.FindOne(ctx, bson.M{"firstlocation": rental.Fields.City})
+	conditions := []bson.M{
+		{"firstlocation": rental.Fields.City},
+		{"secondlocation": rental.Fields.City},
+		{"thirdlocation": rental.Fields.City},
+	}
+
+	cur := t.travelsCollection.FindOne(ctx, bson.M{"$or": conditions})
 	if cur.Err() != nil {
 		return nil, cur.Err()
 	}

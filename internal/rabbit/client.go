@@ -2,6 +2,7 @@ package rabbit
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -60,7 +61,7 @@ func ConnectRabbit() (*RabbitMq, error) {
 func (rabbit *RabbitMq) Publish(body []byte) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-
+	fmt.Println("Um rental foi enviado pra fila")
 	err := rabbit.Channel.PublishWithContext(ctx,
 		"",                           // exchange
 		rabbit.RentalFoundQueue.Name, // routing key
